@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-py"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Creator{
+  id Int @id @default(autoincrement())
+  name String
+  firstname String
+  mail String @unique
+  password String
+  articles Article[]
+  creatAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+model Article{
+  id Int @id @default(autoincrement())
+  authorId Int
+  author Creator @relation(fields: [authorId], references: [id])
+  categorie TypeArticle
+  titre String
+  description String
+  image String?
+  contenu String
+  view Int?
+  creatAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+enum TypeArticle{
+  systeme
+  reseau
+  programmation
+  cybersecurity
+  ia
+}
