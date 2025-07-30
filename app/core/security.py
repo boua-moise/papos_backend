@@ -15,12 +15,12 @@ def create_token(data:int):
         "exp": datetime.datetime.now() + datetime.timedelta(hours=5)
     }
 
-    token = jwt.encode(payload, key="$2b$12$ib08nfwfUXkJKgGfhWfR4ecZKlh8ScmXENDXHgfPCsJxHFJutSDXS", algorithm="HS256")
+    token = jwt.encode(payload, key="$2b$12$ib08nfwfUXkJKgGfhWfR4recZKlh8ScmXENDXHgfPCsJxHFJutSDXS", algorithm="HS256")
 
     return token
 
 def decode_token(token):
-    token_decoded = jwt.decode(token, key="$2b$12$ib08nfwfUXkJKgGfhWfR4ecZKlh8ScmXENDXHgfPCsJxHFJutSDXS", algorithms="HS256")
+    token_decoded = jwt.decode(token, key="$2b$12$ib08nfwfUXkJKgGfhWfR4recZKlh8ScmXENDXHgfPCsJxHFJutSDXS", algorithms="HS256")
     return token_decoded.get("sub")
 
 receive_token = OAuth2PasswordBearer(tokenUrl="/auth/login")
